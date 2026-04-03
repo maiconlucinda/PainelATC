@@ -1,0 +1,27 @@
+.templateLine {
+  display: flex;
+  align-items: baseline;
+  gap: 0;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  margin-bottom: 0.4rem;
+  line-height: 1.8;
+  flex-wrap: wrap;
+}
+
+.segments {
+  flex: 1;
+  display: inline;
+}
+
+.textSegment {
+  white-space: pre-wrap;
+}
+
+.autoFilled {
+  display: inline;
+  color: #5b9bd5;
+  font-weight: 600;
+}

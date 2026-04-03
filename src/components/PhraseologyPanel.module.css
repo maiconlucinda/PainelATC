@@ -1,0 +1,47 @@
+.panel {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.emptyMessage {
+  text-align: center;
+  opacity: 0.5;
+  padding: 2rem;
+  font-style: italic;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.phaseTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.templates {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.exceptionDivider {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #e6a817;
+  opacity: 0.8;
+  margin-top: 0.5rem;
+  padding: 0.4rem 0;
+  border-top: 1px dashed rgba(230, 168, 23, 0.3);
+}
