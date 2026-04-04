@@ -9,8 +9,6 @@ import styles from './TemplateRenderer.module.css';
  * Maps ATIS field names (PT and EN variants) to ATISConfig keys.
  */
 const ATIS_FIELD_MAP: Record<string, keyof ATISConfig> = {
-    pista: 'runway',
-    runway: 'runway',
     letra_ATIS: 'letter',
     atis_letter: 'letter',
     'direção': 'windDirection',
@@ -22,6 +20,14 @@ const ATIS_FIELD_MAP: Record<string, keyof ATISConfig> = {
     aeroporto: 'airportName',
     'código transponder': 'defaultSquawk',
 };
+
+function resolveRunwayKey(fieldName: string, phase: string): keyof ATISConfig | undefined {
+    if (fieldName === 'pista' || fieldName === 'runway') {
+        if (phase === 'landing' || phase === 'taxi_post') return 'runwayArrival';
+        return 'runwayDeparture';
+    }
+    return undefined;
+}
 
 interface TemplateRendererProps {
     template: PhraseologyTemplate;
@@ -53,6 +59,16 @@ export function TemplateRenderer({ template, fieldValues, atis, frequencies, cal
                         return (
                             <span key={i} className={styles.autoFilled}>
                                 {callsign}
+                            </span>
+                        );
+                    }
+
+                    // Auto-filled: Runway (phase-dependent)
+                    const runwayKey = resolveRunwayKey(fieldName, template.phase);
+                    if (runwayKey !== undefined && atis[runwayKey]) {
+                        return (
+                            <span key={i} className={styles.autoFilled}>
+                                {atis[runwayKey]}
                             </span>
                         );
                     }

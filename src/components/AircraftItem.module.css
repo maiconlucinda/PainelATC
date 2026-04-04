@@ -41,23 +41,36 @@
   flex-shrink: 0;
 }
 
-.langBadge {
+.langGroup {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.15rem 0.4rem;
-  font-size: 0.7rem;
-  font-weight: 700;
   border-radius: 4px;
+  overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.06);
-  color: inherit;
-  cursor: pointer;
-  transition: background 0.15s;
 }
 
-.langBadge:hover {
-  background: rgba(255, 255, 255, 0.12);
+.langBtn {
+  padding: 0.1rem 0.35rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  border: none;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.langBtn:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.langBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.langActive {
+  background: rgba(91, 155, 213, 0.3);
+  color: #5b9bd5;
 }
 
 .removeBtn {

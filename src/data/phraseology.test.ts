@@ -3,7 +3,7 @@ import { TEMPLATES, getTemplates } from './phraseology';
 import type { ControlPhase, Language } from '../types';
 import { PHASE_ORDER } from '../types';
 
-const LANGUAGES: Language[] = ['PT', 'EN'];
+const LANGUAGES: Language[] = ['PT', 'EN', 'ES'];
 
 const EXPECTED_COUNTS: Record<ControlPhase, number> = {
     clearance: 6,
@@ -19,10 +19,11 @@ describe('phraseology TEMPLATES', () => {
         expect(Object.keys(TEMPLATES).sort()).toEqual([...PHASE_ORDER].sort());
     });
 
-    it('has PT and EN for every phase', () => {
+    it('has PT, EN and ES for every phase', () => {
         for (const phase of PHASE_ORDER) {
             expect(TEMPLATES[phase]).toHaveProperty('PT');
             expect(TEMPLATES[phase]).toHaveProperty('EN');
+            expect(TEMPLATES[phase]).toHaveProperty('ES');
         }
     });
 

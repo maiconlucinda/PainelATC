@@ -1,4 +1,4 @@
-import type { Aircraft, ControlPhase } from '../types';
+import type { Aircraft, ControlPhase, Language } from '../types';
 import styles from './AircraftItem.module.css';
 
 export const PHASE_LABELS: Record<ControlPhase, string> = {
@@ -10,15 +10,17 @@ export const PHASE_LABELS: Record<ControlPhase, string> = {
     taxi_post: 'Táxi Pós-Pouso',
 };
 
+const LANGUAGES: Language[] = ['PT', 'EN', 'ES'];
+
 interface AircraftItemProps {
     aircraft: Aircraft;
     isSelected: boolean;
     onSelect: (callsign: string) => void;
-    onToggleLanguage: (callsign: string) => void;
+    onSetLanguage: (callsign: string, language: Language) => void;
     onRemove: (callsign: string) => void;
 }
 
-export function AircraftItem({ aircraft, isSelected, onSelect, onToggleLanguage, onRemove }: AircraftItemProps) {
+export function AircraftItem({ aircraft, isSelected, onSelect, onSetLanguage, onRemove }: AircraftItemProps) {
     return (
         <div
             className={`${styles.item} ${isSelected ? styles.selected : ''}`}
@@ -37,16 +39,21 @@ export function AircraftItem({ aircraft, isSelected, onSelect, onToggleLanguage,
                 <div className={styles.phase}>{PHASE_LABELS[aircraft.currentPhase]}</div>
             </div>
             <div className={styles.actions}>
-                <button
-                    className={styles.langBadge}
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        onToggleLanguage(aircraft.callsign);
-                    }}
-                    title="Alternar idioma"
-                >
-                    {aircraft.language}
-                </button>
+                <div className={styles.langGroup}>
+                    {LANGUAGES.map(lang => (
+                        <button
+                            key={lang}
+                            className={`${styles.langBtn} ${aircraft.language === lang ? styles.langActive : ''}`}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                onSetLanguage(aircraft.callsign, lang);
+                            }}
+                            title={`Idioma ${lang}`}
+                        >
+                            {lang}
+                        </button>
+                    ))}
+                </div>
                 <button
                     className={styles.removeBtn}
                     onClick={(e) => {

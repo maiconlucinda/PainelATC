@@ -1,7 +1,7 @@
 // Tipos base
 export type ATCPosition = 'DEL' | 'GND' | 'TWR' | 'TWR_COMBINED';
 export type ControlPhase = 'clearance' | 'pushback' | 'taxi_pre' | 'takeoff' | 'landing' | 'taxi_post';
-export type Language = 'PT' | 'EN';
+export type Language = 'PT' | 'EN' | 'ES';
 
 // Mapeamento de fases visíveis por posição
 export const PHASE_VISIBILITY: Record<ATCPosition, ControlPhase[]> = {
@@ -20,7 +20,8 @@ export const PHASE_ORDER: ControlPhase[] = [
 export interface ATISConfig {
     airportName: string;
     letter: string;
-    runway: string;
+    runwayDeparture: string;
+    runwayArrival: string;
     windDirection: string;
     windSpeed: string;
     qnh: string;
@@ -68,7 +69,7 @@ export type SessionAction =
     | { type: 'SELECT_AIRCRAFT'; payload: string | null }
     | { type: 'ADVANCE_PHASE'; payload: string }
     | { type: 'RETREAT_PHASE'; payload: string }
-    | { type: 'TOGGLE_LANGUAGE'; payload: string }
+    | { type: 'SET_LANGUAGE'; payload: { callsign: string; language: Language } }
     | { type: 'UPDATE_FIELD'; payload: { callsign: string; phase: ControlPhase; fieldName: string; value: string } }
     | { type: 'ADD_RUNWAY'; payload: string }
     | { type: 'REMOVE_RUNWAY'; payload: string }
@@ -95,7 +96,8 @@ export const INITIAL_STATE: SessionState = {
     atis: {
         airportName: '',
         letter: '',
-        runway: '',
+        runwayDeparture: '',
+        runwayArrival: '',
         windDirection: '',
         windSpeed: '',
         qnh: '',

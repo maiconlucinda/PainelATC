@@ -5,7 +5,8 @@ import styles from './ATISPanel.module.css';
 const ATIS_FIELDS: { key: keyof ATISConfig; label: string; placeholder: string }[] = [
     { key: 'airportName', label: 'Nome do aeroporto', placeholder: 'Ex: Salvador' },
     { key: 'letter', label: 'Letra ATIS', placeholder: 'Ex: A' },
-    { key: 'runway', label: 'Pista em uso', placeholder: 'Ex: 10' },
+    { key: 'runwayDeparture', label: 'Pista decolagem', placeholder: 'Ex: 10' },
+    { key: 'runwayArrival', label: 'Pista pouso', placeholder: 'Ex: 28' },
     { key: 'windDirection', label: 'Direção do vento (graus)', placeholder: 'Ex: 180' },
     { key: 'windSpeed', label: 'Velocidade do vento (nós)', placeholder: 'Ex: 8' },
     { key: 'qnh', label: 'QNH (hPa)', placeholder: 'Ex: 1013' },

@@ -3,21 +3,27 @@ import { renderTemplate } from './templates';
 import type { PhraseologyTemplate, ATISConfig } from '../types';
 
 const defaultATIS: ATISConfig = {
+    airportName: 'Salvador',
     letter: 'A',
-    runway: '10',
+    runwayDeparture: '10',
+    runwayArrival: '10',
     windDirection: '090',
     windSpeed: '8',
     qnh: '1013',
     visibility: '9999',
+    defaultSquawk: '4321',
 };
 
 const emptyATIS: ATISConfig = {
+    airportName: '',
     letter: '',
-    runway: '',
+    runwayDeparture: '',
+    runwayArrival: '',
     windDirection: '',
     windSpeed: '',
     qnh: '',
     visibility: '',
+    defaultSquawk: '',
 };
 
 describe('renderTemplate', () => {

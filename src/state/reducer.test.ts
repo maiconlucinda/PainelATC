@@ -74,7 +74,7 @@ describe('sessionReducer', () => {
             });
             expect(result.atis.letter).toBe('A');
             expect(result.atis.qnh).toBe('1013');
-            expect(result.atis.runway).toBe('');
+            expect(result.atis.runwayDeparture).toBe('');
         });
     });
 
@@ -185,17 +185,23 @@ describe('sessionReducer', () => {
         });
     });
 
-    describe('TOGGLE_LANGUAGE', () => {
-        it('toggles PT to EN', () => {
+    describe('SET_LANGUAGE', () => {
+        it('sets language to EN', () => {
             let state = sessionReducer(INITIAL_STATE, { type: 'ADD_AIRCRAFT', payload: 'TAM1' });
-            state = sessionReducer(state, { type: 'TOGGLE_LANGUAGE', payload: 'TAM1' });
+            state = sessionReducer(state, { type: 'SET_LANGUAGE', payload: { callsign: 'TAM1', language: 'EN' } });
             expect(state.aircraft[0].language).toBe('EN');
         });
 
-        it('toggles EN back to PT', () => {
+        it('sets language to ES', () => {
             let state = sessionReducer(INITIAL_STATE, { type: 'ADD_AIRCRAFT', payload: 'TAM1' });
-            state = sessionReducer(state, { type: 'TOGGLE_LANGUAGE', payload: 'TAM1' });
-            state = sessionReducer(state, { type: 'TOGGLE_LANGUAGE', payload: 'TAM1' });
+            state = sessionReducer(state, { type: 'SET_LANGUAGE', payload: { callsign: 'TAM1', language: 'ES' } });
+            expect(state.aircraft[0].language).toBe('ES');
+        });
+
+        it('sets language back to PT', () => {
+            let state = sessionReducer(INITIAL_STATE, { type: 'ADD_AIRCRAFT', payload: 'TAM1' });
+            state = sessionReducer(state, { type: 'SET_LANGUAGE', payload: { callsign: 'TAM1', language: 'EN' } });
+            state = sessionReducer(state, { type: 'SET_LANGUAGE', payload: { callsign: 'TAM1', language: 'PT' } });
             expect(state.aircraft[0].language).toBe('PT');
         });
 
@@ -205,7 +211,7 @@ describe('sessionReducer', () => {
                 type: 'UPDATE_FIELD',
                 payload: { callsign: 'TAM1', phase: 'clearance', fieldName: 'destino', value: 'SBGR' },
             });
-            state = sessionReducer(state, { type: 'TOGGLE_LANGUAGE', payload: 'TAM1' });
+            state = sessionReducer(state, { type: 'SET_LANGUAGE', payload: { callsign: 'TAM1', language: 'EN' } });
             expect(state.aircraft[0].fieldValues.clearance.destino).toBe('SBGR');
         });
     });

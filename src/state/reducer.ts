@@ -93,12 +93,12 @@ export function sessionReducer(state: SessionState, action: SessionAction): Sess
                 ),
             };
 
-        case 'TOGGLE_LANGUAGE':
+        case 'SET_LANGUAGE':
             return {
                 ...state,
                 aircraft: state.aircraft.map(ac =>
-                    ac.callsign === action.payload
-                        ? { ...ac, language: ac.language === 'PT' ? 'EN' : 'PT' }
+                    ac.callsign === action.payload.callsign
+                        ? { ...ac, language: action.payload.language }
                         : ac
                 ),
             };

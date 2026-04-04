@@ -58,7 +58,7 @@ export function AircraftList() {
                             aircraft={ac}
                             isSelected={state.selectedAircraftCallsign === ac.callsign}
                             onSelect={(cs) => dispatch({ type: 'SELECT_AIRCRAFT', payload: cs })}
-                            onToggleLanguage={(cs) => dispatch({ type: 'TOGGLE_LANGUAGE', payload: cs })}
+                            onSetLanguage={(cs, lang) => dispatch({ type: 'SET_LANGUAGE', payload: { callsign: cs, language: lang } })}
                             onRemove={(cs) => dispatch({ type: 'REMOVE_AIRCRAFT', payload: cs })}
                         />
                     ))

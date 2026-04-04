@@ -2,10 +2,9 @@ import type { PhraseologyTemplate, ATISConfig, FrequencyConfig } from '../types'
 
 /**
  * Maps ATIS field names (PT and EN variants) to ATISConfig keys.
+ * Note: 'pista'/'runway' are resolved dynamically based on phase (departure vs arrival).
  */
 const ATIS_FIELD_MAP: Record<string, keyof ATISConfig> = {
-    pista: 'runway',
-    runway: 'runway',
     letra_ATIS: 'letter',
     atis_letter: 'letter',
     'direção': 'windDirection',
@@ -17,6 +16,18 @@ const ATIS_FIELD_MAP: Record<string, keyof ATISConfig> = {
     aeroporto: 'airportName',
     'código transponder': 'defaultSquawk',
 };
+
+/**
+ * Resolves 'pista'/'runway' to the correct ATISConfig key based on phase.
+ * Landing/taxi_post phases use arrival runway, all others use departure runway.
+ */
+function resolveRunwayKey(fieldName: string, phase: string): keyof ATISConfig | undefined {
+    if (fieldName === 'pista' || fieldName === 'runway') {
+        if (phase === 'landing' || phase === 'taxi_post') return 'runwayArrival';
+        return 'runwayDeparture';
+    }
+    return undefined;
+}
 
 /**
  * Maps frequency handoff field names to FrequencyConfig keys.
@@ -71,13 +82,19 @@ export function renderTemplate(
                 return callsign;
             }
 
-            // Priority 2: ATIS fields
+            // Priority 2: Runway fields (phase-dependent)
+            const runwayKey = resolveRunwayKey(fieldName, template.phase);
+            if (runwayKey !== undefined) {
+                return atis[runwayKey];
+            }
+
+            // Priority 3: ATIS fields
             const atisKey = ATIS_FIELD_MAP[fieldName];
             if (atisKey !== undefined) {
                 return atis[atisKey];
             }
 
-            // Priority 3: Frequency fields
+            // Priority 4: Frequency fields
             if (frequencies) {
                 const freqKey = resolveFreqKey(fieldName, template.phase);
                 if (freqKey !== undefined && frequencies[freqKey]) {
