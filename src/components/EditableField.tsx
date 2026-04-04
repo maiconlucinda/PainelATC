@@ -11,12 +11,14 @@ interface EditableFieldProps {
 }
 
 export function EditableField({ fieldName, value, callsign, phase, dispatch }: EditableFieldProps) {
+    const displayLength = Math.max(value.length, fieldName.length, 4);
     return (
         <input
             className={styles.field}
             type="text"
             value={value}
             placeholder={fieldName}
+            size={displayLength + 1}
             onChange={(e) =>
                 dispatch({
                     type: 'UPDATE_FIELD',
