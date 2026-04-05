@@ -35,7 +35,7 @@ export const TEMPLATES: Record<ControlPhase, Record<Language, PhraseologyTemplat
                     { type: 'field', value: 'callsign' },
                     { type: 'text', value: ', autorizado ' },
                     { type: 'field', value: 'destino' },
-                    { type: 'text', value: ', saída ' },
+                    { type: 'text', value: ', conforme rota do plano de voo, saída ' },
                     { type: 'field', value: 'SID/rota' },
                     { type: 'text', value: ', nível de voo ' },
                     { type: 'field', value: 'nível' },
@@ -106,7 +106,7 @@ export const TEMPLATES: Record<ControlPhase, Record<Language, PhraseologyTemplat
                     { type: 'field', value: 'callsign' },
                     { type: 'text', value: ', cleared to ' },
                     { type: 'field', value: 'destino' },
-                    { type: 'text', value: ', departure ' },
+                    { type: 'text', value: ', as per filed route, departure ' },
                     { type: 'field', value: 'SID/rota' },
                     { type: 'text', value: ', flight level ' },
                     { type: 'field', value: 'nível' },
@@ -177,7 +177,7 @@ export const TEMPLATES: Record<ControlPhase, Record<Language, PhraseologyTemplat
                     { type: 'field', value: 'callsign' },
                     { type: 'text', value: ', autorizado a ' },
                     { type: 'field', value: 'destino' },
-                    { type: 'text', value: ', salida ' },
+                    { type: 'text', value: ', conforme ruta del plan de vuelo, salida ' },
                     { type: 'field', value: 'SID/rota' },
                     { type: 'text', value: ', nivel de vuelo ' },
                     { type: 'field', value: 'nível' },
@@ -529,6 +529,18 @@ export const TEMPLATES: Record<ControlPhase, Record<Language, PhraseologyTemplat
     landing: {
         PT: [
             {
+                id: 'lnd-pt-2',
+                phase: 'landing',
+                language: 'PT',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', pista ' },
+                    { type: 'field', value: 'pista' },
+                    { type: 'text', value: ', continue aproximação, número ' },
+                    { type: 'field', value: 'sequência' },
+                ],
+            },
+            {
                 id: 'lnd-pt-1',
                 phase: 'landing',
                 language: 'PT',
@@ -542,18 +554,6 @@ export const TEMPLATES: Record<ControlPhase, Record<Language, PhraseologyTemplat
                     { type: 'field', value: 'velocidade' },
                     { type: 'text', value: ' nós, ajuste altímetro ' },
                     { type: 'field', value: 'QNH' },
-                ],
-            },
-            {
-                id: 'lnd-pt-2',
-                phase: 'landing',
-                language: 'PT',
-                segments: [
-                    { type: 'field', value: 'callsign' },
-                    { type: 'text', value: ', pista ' },
-                    { type: 'field', value: 'pista' },
-                    { type: 'text', value: ', continue aproximação, número ' },
-                    { type: 'field', value: 'sequência' },
                 ],
             },
             {
@@ -587,6 +587,18 @@ export const TEMPLATES: Record<ControlPhase, Record<Language, PhraseologyTemplat
         ],
         EN: [
             {
+                id: 'lnd-en-2',
+                phase: 'landing',
+                language: 'EN',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', runway ' },
+                    { type: 'field', value: 'runway' },
+                    { type: 'text', value: ', continue approach, number ' },
+                    { type: 'field', value: 'sequência' },
+                ],
+            },
+            {
                 id: 'lnd-en-1',
                 phase: 'landing',
                 language: 'EN',
@@ -600,18 +612,6 @@ export const TEMPLATES: Record<ControlPhase, Record<Language, PhraseologyTemplat
                     { type: 'field', value: 'speed' },
                     { type: 'text', value: ' knots, altimeter ' },
                     { type: 'field', value: 'qnh' },
-                ],
-            },
-            {
-                id: 'lnd-en-2',
-                phase: 'landing',
-                language: 'EN',
-                segments: [
-                    { type: 'field', value: 'callsign' },
-                    { type: 'text', value: ', runway ' },
-                    { type: 'field', value: 'runway' },
-                    { type: 'text', value: ', continue approach, number ' },
-                    { type: 'field', value: 'sequência' },
                 ],
             },
             {
@@ -641,6 +641,18 @@ export const TEMPLATES: Record<ControlPhase, Record<Language, PhraseologyTemplat
         ],
         ES: [
             {
+                id: 'lnd-es-2',
+                phase: 'landing',
+                language: 'ES',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', pista ' },
+                    { type: 'field', value: 'runway' },
+                    { type: 'text', value: ', continúe aproximación, número ' },
+                    { type: 'field', value: 'sequência' },
+                ],
+            },
+            {
                 id: 'lnd-es-1',
                 phase: 'landing',
                 language: 'ES',
@@ -654,18 +666,6 @@ export const TEMPLATES: Record<ControlPhase, Record<Language, PhraseologyTemplat
                     { type: 'field', value: 'speed' },
                     { type: 'text', value: ' nudos, altímetro ' },
                     { type: 'field', value: 'qnh' },
-                ],
-            },
-            {
-                id: 'lnd-es-2',
-                phase: 'landing',
-                language: 'ES',
-                segments: [
-                    { type: 'field', value: 'callsign' },
-                    { type: 'text', value: ', pista ' },
-                    { type: 'field', value: 'runway' },
-                    { type: 'text', value: ', continúe aproximación, número ' },
-                    { type: 'field', value: 'sequência' },
                 ],
             },
             {

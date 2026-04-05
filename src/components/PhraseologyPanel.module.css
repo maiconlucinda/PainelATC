@@ -45,3 +45,47 @@
   padding: 0.4rem 0;
   border-top: 1px dashed rgba(230, 168, 23, 0.3);
 }
+
+.notesRow {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 0.75rem;
+}
+
+.notesSection {
+  flex: 1;
+  min-width: 0;
+}
+
+.notesLabel {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  opacity: 0.7;
+  margin-bottom: 0.4rem;
+}
+
+.notesArea {
+  width: 100%;
+  min-height: 80px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.15s;
+}
+
+.notesArea:focus {
+  border-color: #5b9bd5;
+}
+
+.notesArea::placeholder {
+  opacity: 0.4;
+}

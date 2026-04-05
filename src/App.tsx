@@ -4,7 +4,6 @@ import { PositionSelector } from './components/PositionSelector';
 import { SessionRestoreDialog } from './components/SessionRestoreDialog';
 import { AircraftList } from './components/AircraftList';
 import { ATISPanel } from './components/ATISPanel';
-import { RunwayConfig } from './components/RunwayConfig';
 import { PhraseologyPanel } from './components/PhraseologyPanel';
 import { NewSessionButton } from './components/NewSessionButton';
 import styles from './App.module.css';
@@ -51,7 +50,6 @@ function AppContent() {
         <aside className={styles.sidebar}>
           <AircraftList />
           <ATISPanel />
-          <RunwayConfig />
         </aside>
         <main className={styles.main}>
           <PhraseologyPanel />

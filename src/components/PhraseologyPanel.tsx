@@ -78,6 +78,26 @@ export function PhraseologyPanel() {
                     </div>
                 </>
             )}
+            <div className={styles.notesRow}>
+                <div className={styles.notesSection}>
+                    <label className={styles.notesLabel}>📝 Notas gerais</label>
+                    <textarea
+                        className={styles.notesArea}
+                        placeholder="Anotações da sessão..."
+                        value={state.generalNotes}
+                        onChange={(e) => dispatch({ type: 'UPDATE_GENERAL_NOTES', payload: e.target.value })}
+                    />
+                </div>
+                <div className={styles.notesSection}>
+                    <label className={styles.notesLabel}>✈️ Notas — {callsign}</label>
+                    <textarea
+                        className={styles.notesArea}
+                        placeholder="Anotações sobre esta aeronave..."
+                        value={selectedAircraft.notes}
+                        onChange={(e) => dispatch({ type: 'UPDATE_NOTES', payload: { callsign, notes: e.target.value } })}
+                    />
+                </div>
+            </div>
         </div>
     );
 }

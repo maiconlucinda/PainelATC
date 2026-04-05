@@ -34,6 +34,7 @@ export interface Aircraft {
     language: Language;
     currentPhase: ControlPhase;
     fieldValues: Record<ControlPhase, Record<string, string>>;
+    notes: string;
 }
 
 export interface Runway {
@@ -56,6 +57,7 @@ export interface SessionState {
     runways: Runway[];
     selectedAircraftCallsign: string | null;
     sessionStarted: boolean;
+    generalNotes: string;
 }
 
 // Actions do Reducer
@@ -71,6 +73,8 @@ export type SessionAction =
     | { type: 'RETREAT_PHASE'; payload: string }
     | { type: 'SET_LANGUAGE'; payload: { callsign: string; language: Language } }
     | { type: 'UPDATE_FIELD'; payload: { callsign: string; phase: ControlPhase; fieldName: string; value: string } }
+    | { type: 'UPDATE_NOTES'; payload: { callsign: string; notes: string } }
+    | { type: 'UPDATE_GENERAL_NOTES'; payload: string }
     | { type: 'ADD_RUNWAY'; payload: string }
     | { type: 'REMOVE_RUNWAY'; payload: string }
     | { type: 'SET_ACTIVE_RUNWAY'; payload: string }
@@ -113,4 +117,5 @@ export const INITIAL_STATE: SessionState = {
     runways: [],
     selectedAircraftCallsign: null,
     sessionStarted: false,
+    generalNotes: '',
 };

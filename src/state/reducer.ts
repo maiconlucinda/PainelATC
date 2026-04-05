@@ -50,6 +50,7 @@ export function sessionReducer(state: SessionState, action: SessionAction): Sess
                 language: 'PT' as const,
                 currentPhase: getInitialPhase(state.position),
                 fieldValues: createEmptyFieldValues(),
+                notes: '',
             };
             return {
                 ...state,
@@ -123,6 +124,19 @@ export function sessionReducer(state: SessionState, action: SessionAction): Sess
                 ),
             };
         }
+
+        case 'UPDATE_NOTES':
+            return {
+                ...state,
+                aircraft: state.aircraft.map(ac =>
+                    ac.callsign === action.payload.callsign
+                        ? { ...ac, notes: action.payload.notes }
+                        : ac
+                ),
+            };
+
+        case 'UPDATE_GENERAL_NOTES':
+            return { ...state, generalNotes: action.payload };
 
         case 'ADD_RUNWAY': {
             const newRunway = {
