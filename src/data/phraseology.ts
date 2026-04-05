@@ -106,7 +106,7 @@ export const TEMPLATES: Record<ControlPhase, Record<Language, PhraseologyTemplat
                     { type: 'field', value: 'callsign' },
                     { type: 'text', value: ', cleared to ' },
                     { type: 'field', value: 'destino' },
-                    { type: 'text', value: ', as per filed route, departure ' },
+                    { type: 'text', value: ', flight plan route, departure ' },
                     { type: 'field', value: 'SID/rota' },
                     { type: 'text', value: ', flight level ' },
                     { type: 'field', value: 'nível' },
