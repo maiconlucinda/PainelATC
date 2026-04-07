@@ -22,6 +22,7 @@ const sampleState: SessionState = {
                 landing: {},
                 taxi_post: {},
             },
+            notes: '',
         },
     ],
 };

@@ -14,6 +14,7 @@ const makeAircraft = (callsign: string): Aircraft => ({
         landing: {},
         taxi_post: {},
     },
+    notes: '',
 });
 
 describe('isCallsignUnique', () => {

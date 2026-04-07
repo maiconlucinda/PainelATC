@@ -24,12 +24,14 @@ const savedState: SessionState = {
             language: 'PT',
             currentPhase: 'takeoff',
             fieldValues: { clearance: {}, pushback: {}, taxi_pre: {}, takeoff: {}, landing: {}, taxi_post: {} },
+            notes: '',
         },
         {
             callsign: 'GLO456',
             language: 'EN',
             currentPhase: 'landing',
             fieldValues: { clearance: {}, pushback: {}, taxi_pre: {}, takeoff: {}, landing: {}, taxi_post: {} },
+            notes: '',
         },
     ],
 };

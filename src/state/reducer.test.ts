@@ -22,6 +22,7 @@ describe('sessionReducer', () => {
                     language: 'PT',
                     currentPhase: 'takeoff',
                     fieldValues: createEmptyFieldValues(),
+                    notes: '',
                 }],
             });
             const result = sessionReducer(state, { type: 'SET_POSITION', payload: 'GND' });
@@ -36,6 +37,7 @@ describe('sessionReducer', () => {
                     language: 'PT',
                     currentPhase: 'clearance',
                     fieldValues: createEmptyFieldValues(),
+                    notes: '',
                 }],
             });
             const result = sessionReducer(state, { type: 'SET_POSITION', payload: 'DEL' });
@@ -52,6 +54,7 @@ describe('sessionReducer', () => {
                     language: 'PT',
                     currentPhase: 'clearance',
                     fieldValues: fv,
+                    notes: '',
                 }],
             });
             const result = sessionReducer(state, { type: 'SET_POSITION', payload: 'DEL' });
@@ -163,6 +166,7 @@ describe('sessionReducer', () => {
                     language: 'PT',
                     currentPhase: 'clearance',
                     fieldValues: createEmptyFieldValues(),
+                    notes: '',
                 }],
             });
             const result = sessionReducer(state, { type: 'ADVANCE_PHASE', payload: 'TAM1' });
@@ -285,6 +289,7 @@ describe('sessionReducer', () => {
                     language: 'EN',
                     currentPhase: 'clearance',
                     fieldValues: createEmptyFieldValues(),
+                    notes: '',
                 }],
             };
             const result = sessionReducer(INITIAL_STATE, { type: 'RESTORE_SESSION', payload: saved });
