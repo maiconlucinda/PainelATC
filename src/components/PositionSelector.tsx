@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { ATCPosition } from '../types';
+import type { ATCPosition, UserRole } from '../types';
 import { useSession } from '../state/SessionContext';
 import styles from './PositionSelector.module.css';
 
@@ -12,12 +12,46 @@ const POSITION_OPTIONS: { value: ATCPosition; label: string; description: string
 
 export function PositionSelector() {
     const { dispatch } = useSession();
+    const [role, setRole] = useState<UserRole | null>(null);
     const [selected, setSelected] = useState<ATCPosition>('TWR_COMBINED');
 
     const handleStart = () => {
         dispatch({ type: 'SET_POSITION', payload: selected });
         dispatch({ type: 'START_SESSION' });
     };
+
+    const handlePilotStart = () => {
+        dispatch({ type: 'SET_ROLE', payload: 'pilot' });
+        dispatch({ type: 'SET_POSITION', payload: 'TWR_COMBINED' });
+        dispatch({ type: 'START_SESSION' });
+    };
+
+    if (!role) {
+        return (
+            <div className={styles.container}>
+                <h1 className={styles.title}>Painel ATC</h1>
+                <p className={styles.subtitle}>Selecione o seu papel</p>
+                <div className={styles.roleOptions}>
+                    <button
+                        className={styles.roleButton}
+                        onClick={() => setRole('controller')}
+                    >
+                        <span className={styles.roleIcon}>🎧</span>
+                        <span className={styles.roleLabel}>Controlador</span>
+                        <span className={styles.roleDesc}>Fraseologia ATC (torre, solo, DEL)</span>
+                    </button>
+                    <button
+                        className={styles.roleButton}
+                        onClick={() => handlePilotStart()}
+                    >
+                        <span className={styles.roleIcon}>✈️</span>
+                        <span className={styles.roleLabel}>Piloto</span>
+                        <span className={styles.roleDesc}>Fraseologia do piloto (comunicação com ATC)</span>
+                    </button>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className={styles.container}>
@@ -46,9 +80,14 @@ export function PositionSelector() {
                 ))}
             </div>
 
-            <button className={styles.startButton} onClick={handleStart}>
-                Iniciar Sessão
-            </button>
+            <div className={styles.buttonRow}>
+                <button className={styles.backButton} onClick={() => setRole(null)}>
+                    Voltar
+                </button>
+                <button className={styles.startButton} onClick={handleStart}>
+                    Iniciar Sessão
+                </button>
+            </div>
         </div>
     );
 }

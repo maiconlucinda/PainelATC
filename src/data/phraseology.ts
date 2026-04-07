@@ -790,3 +790,505 @@ export const TEMPLATES: Record<ControlPhase, Record<Language, PhraseologyTemplat
 export function getTemplates(phase: ControlPhase, language: Language): PhraseologyTemplate[] {
     return TEMPLATES[phase][language];
 }
+
+/**
+ * Pilot-side phraseology templates organized by control phase and language.
+ */
+export const PILOT_TEMPLATES: Record<ControlPhase, Record<Language, PhraseologyTemplate[]>> = {
+    clearance: {
+        PT: [
+            {
+                id: 'p-clr-pt-1',
+                phase: 'clearance',
+                language: 'PT',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', ' },
+                    { type: 'field', value: 'aeroporto' },
+                    { type: 'text', value: ' ' },
+                    { type: 'field', value: 'órgão_contato' },
+                    { type: 'text', value: ', solicito autorização para ' },
+                    { type: 'field', value: 'destino' },
+                ],
+            },
+            {
+                id: 'p-clr-pt-2',
+                phase: 'clearance',
+                language: 'PT',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', autorizado ' },
+                    { type: 'field', value: 'destino' },
+                    { type: 'text', value: ', conforme rota do plano de voo, saída ' },
+                    { type: 'field', value: 'SID/rota' },
+                    { type: 'text', value: ', nível de voo ' },
+                    { type: 'field', value: 'nível' },
+                    { type: 'text', value: ', pista ' },
+                    { type: 'field', value: 'pista' },
+                    { type: 'text', value: ', transponder ' },
+                    { type: 'field', value: 'código transponder' },
+                    { type: 'text', value: '. Informação ' },
+                    { type: 'field', value: 'letra_ATIS' },
+                ],
+            },
+            {
+                id: 'p-clr-pt-3',
+                phase: 'clearance',
+                language: 'PT',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', pronto para pushback e acionamento' },
+                ],
+            },
+        ],
+        EN: [
+            {
+                id: 'p-clr-en-1',
+                phase: 'clearance',
+                language: 'EN',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', ' },
+                    { type: 'field', value: 'aeroporto' },
+                    { type: 'text', value: ' ' },
+                    { type: 'field', value: 'órgão_contato' },
+                    { type: 'text', value: ', request clearance to ' },
+                    { type: 'field', value: 'destino' },
+                ],
+            },
+            {
+                id: 'p-clr-en-2',
+                phase: 'clearance',
+                language: 'EN',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', cleared to ' },
+                    { type: 'field', value: 'destino' },
+                    { type: 'text', value: ', flight plan route, departure ' },
+                    { type: 'field', value: 'SID/rota' },
+                    { type: 'text', value: ', flight level ' },
+                    { type: 'field', value: 'nível' },
+                    { type: 'text', value: ', runway ' },
+                    { type: 'field', value: 'runway' },
+                    { type: 'text', value: ', squawk ' },
+                    { type: 'field', value: 'código transponder' },
+                    { type: 'text', value: '. Information ' },
+                    { type: 'field', value: 'atis_letter' },
+                ],
+            },
+            {
+                id: 'p-clr-en-3',
+                phase: 'clearance',
+                language: 'EN',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', ready for pushback and startup' },
+                ],
+            },
+        ],
+        ES: [
+            {
+                id: 'p-clr-es-1',
+                phase: 'clearance',
+                language: 'ES',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', ' },
+                    { type: 'field', value: 'aeroporto' },
+                    { type: 'text', value: ' ' },
+                    { type: 'field', value: 'órgão_contato' },
+                    { type: 'text', value: ', solicito autorización para ' },
+                    { type: 'field', value: 'destino' },
+                ],
+            },
+            {
+                id: 'p-clr-es-2',
+                phase: 'clearance',
+                language: 'ES',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', autorizado a ' },
+                    { type: 'field', value: 'destino' },
+                    { type: 'text', value: ', conforme ruta del plan de vuelo, salida ' },
+                    { type: 'field', value: 'SID/rota' },
+                    { type: 'text', value: ', nivel de vuelo ' },
+                    { type: 'field', value: 'nível' },
+                    { type: 'text', value: ', pista ' },
+                    { type: 'field', value: 'runway' },
+                    { type: 'text', value: ', transponder ' },
+                    { type: 'field', value: 'código transponder' },
+                    { type: 'text', value: '. Información ' },
+                    { type: 'field', value: 'atis_letter' },
+                ],
+            },
+            {
+                id: 'p-clr-es-3',
+                phase: 'clearance',
+                language: 'ES',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', listo para pushback y encendido' },
+                ],
+            },
+        ],
+    },
+    pushback: {
+        PT: [
+            {
+                id: 'p-push-pt-1',
+                phase: 'pushback',
+                language: 'PT',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', pronto para táxi' },
+                ],
+            },
+        ],
+        EN: [
+            {
+                id: 'p-push-en-1',
+                phase: 'pushback',
+                language: 'EN',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', ready for taxi' },
+                ],
+            },
+        ],
+        ES: [
+            {
+                id: 'p-push-es-1',
+                phase: 'pushback',
+                language: 'ES',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', listo para rodaje' },
+                ],
+            },
+        ],
+    },
+    taxi_pre: {
+        PT: [
+            {
+                id: 'p-txpre-pt-1',
+                phase: 'taxi_pre',
+                language: 'PT',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', táxi para ponto de espera pista ' },
+                    { type: 'field', value: 'pista' },
+                    { type: 'text', value: ', via ' },
+                    { type: 'field', value: 'taxiways' },
+                ],
+            },
+            {
+                id: 'p-txpre-pt-2',
+                phase: 'taxi_pre',
+                language: 'PT',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', no ponto de espera pista ' },
+                    { type: 'field', value: 'pista' },
+                ],
+            },
+        ],
+        EN: [
+            {
+                id: 'p-txpre-en-1',
+                phase: 'taxi_pre',
+                language: 'EN',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', taxi to holding point runway ' },
+                    { type: 'field', value: 'runway' },
+                    { type: 'text', value: ', via ' },
+                    { type: 'field', value: 'taxiways' },
+                ],
+            },
+            {
+                id: 'p-txpre-en-2',
+                phase: 'taxi_pre',
+                language: 'EN',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', holding point runway ' },
+                    { type: 'field', value: 'runway' },
+                ],
+            },
+        ],
+        ES: [
+            {
+                id: 'p-txpre-es-1',
+                phase: 'taxi_pre',
+                language: 'ES',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', rodaje al punto de espera pista ' },
+                    { type: 'field', value: 'runway' },
+                    { type: 'text', value: ', vía ' },
+                    { type: 'field', value: 'taxiways' },
+                ],
+            },
+            {
+                id: 'p-txpre-es-2',
+                phase: 'taxi_pre',
+                language: 'ES',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', en punto de espera pista ' },
+                    { type: 'field', value: 'runway' },
+                ],
+            },
+        ],
+    },
+    takeoff: {
+        PT: [
+            {
+                id: 'p-tko-pt-1',
+                phase: 'takeoff',
+                language: 'PT',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', pista ' },
+                    { type: 'field', value: 'pista' },
+                    { type: 'text', value: ', alinhado e pronto' },
+                ],
+            },
+            {
+                id: 'p-tko-pt-2',
+                phase: 'takeoff',
+                language: 'PT',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', pista ' },
+                    { type: 'field', value: 'pista' },
+                    { type: 'text', value: ', autorizado decolagem' },
+                ],
+            },
+        ],
+        EN: [
+            {
+                id: 'p-tko-en-1',
+                phase: 'takeoff',
+                language: 'EN',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', runway ' },
+                    { type: 'field', value: 'runway' },
+                    { type: 'text', value: ', lined up and ready' },
+                ],
+            },
+            {
+                id: 'p-tko-en-2',
+                phase: 'takeoff',
+                language: 'EN',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', runway ' },
+                    { type: 'field', value: 'runway' },
+                    { type: 'text', value: ', cleared for takeoff' },
+                ],
+            },
+        ],
+        ES: [
+            {
+                id: 'p-tko-es-1',
+                phase: 'takeoff',
+                language: 'ES',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', pista ' },
+                    { type: 'field', value: 'runway' },
+                    { type: 'text', value: ', alineado y listo' },
+                ],
+            },
+            {
+                id: 'p-tko-es-2',
+                phase: 'takeoff',
+                language: 'ES',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', pista ' },
+                    { type: 'field', value: 'runway' },
+                    { type: 'text', value: ', autorizado despegue' },
+                ],
+            },
+        ],
+    },
+    landing: {
+        PT: [
+            {
+                id: 'p-lnd-pt-1',
+                phase: 'landing',
+                language: 'PT',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', na final pista ' },
+                    { type: 'field', value: 'pista' },
+                ],
+            },
+            {
+                id: 'p-lnd-pt-2',
+                phase: 'landing',
+                language: 'PT',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', pista ' },
+                    { type: 'field', value: 'pista' },
+                    { type: 'text', value: ', autorizado pouso' },
+                ],
+            },
+            {
+                id: 'p-lnd-pt-3',
+                phase: 'landing',
+                language: 'PT',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', pista livre' },
+                ],
+            },
+        ],
+        EN: [
+            {
+                id: 'p-lnd-en-1',
+                phase: 'landing',
+                language: 'EN',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', final runway ' },
+                    { type: 'field', value: 'runway' },
+                ],
+            },
+            {
+                id: 'p-lnd-en-2',
+                phase: 'landing',
+                language: 'EN',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', runway ' },
+                    { type: 'field', value: 'runway' },
+                    { type: 'text', value: ', cleared to land' },
+                ],
+            },
+            {
+                id: 'p-lnd-en-3',
+                phase: 'landing',
+                language: 'EN',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', runway vacated' },
+                ],
+            },
+        ],
+        ES: [
+            {
+                id: 'p-lnd-es-1',
+                phase: 'landing',
+                language: 'ES',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', en final pista ' },
+                    { type: 'field', value: 'runway' },
+                ],
+            },
+            {
+                id: 'p-lnd-es-2',
+                phase: 'landing',
+                language: 'ES',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', pista ' },
+                    { type: 'field', value: 'runway' },
+                    { type: 'text', value: ', autorizado aterrizaje' },
+                ],
+            },
+            {
+                id: 'p-lnd-es-3',
+                phase: 'landing',
+                language: 'ES',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', pista libre' },
+                ],
+            },
+        ],
+    },
+    taxi_post: {
+        PT: [
+            {
+                id: 'p-txpost-pt-1',
+                phase: 'taxi_post',
+                language: 'PT',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', pista livre, solicito táxi para pátio' },
+                ],
+            },
+            {
+                id: 'p-txpost-pt-2',
+                phase: 'taxi_post',
+                language: 'PT',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', táxi para pátio ' },
+                    { type: 'field', value: 'pátio' },
+                    { type: 'text', value: ', via ' },
+                    { type: 'field', value: 'taxiways' },
+                ],
+            },
+        ],
+        EN: [
+            {
+                id: 'p-txpost-en-1',
+                phase: 'taxi_post',
+                language: 'EN',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', runway vacated, request taxi to apron' },
+                ],
+            },
+            {
+                id: 'p-txpost-en-2',
+                phase: 'taxi_post',
+                language: 'EN',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', taxi to apron ' },
+                    { type: 'field', value: 'pátio' },
+                    { type: 'text', value: ', via ' },
+                    { type: 'field', value: 'taxiways' },
+                ],
+            },
+        ],
+        ES: [
+            {
+                id: 'p-txpost-es-1',
+                phase: 'taxi_post',
+                language: 'ES',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', pista libre, solicito rodaje a plataforma' },
+                ],
+            },
+            {
+                id: 'p-txpost-es-2',
+                phase: 'taxi_post',
+                language: 'ES',
+                segments: [
+                    { type: 'field', value: 'callsign' },
+                    { type: 'text', value: ', rodaje a plataforma ' },
+                    { type: 'field', value: 'pátio' },
+                    { type: 'text', value: ', vía ' },
+                    { type: 'field', value: 'taxiways' },
+                ],
+            },
+        ],
+    },
+};
+
+/**
+ * Returns the pilot phraseology templates for a given control phase and language.
+ */
+export function getPilotTemplates(phase: ControlPhase, language: Language): PhraseologyTemplate[] {
+    return PILOT_TEMPLATES[phase][language];
+}

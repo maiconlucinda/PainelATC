@@ -2,6 +2,7 @@
 export type ATCPosition = 'DEL' | 'GND' | 'TWR' | 'TWR_COMBINED';
 export type ControlPhase = 'clearance' | 'pushback' | 'taxi_pre' | 'takeoff' | 'landing' | 'taxi_post';
 export type Language = 'PT' | 'EN' | 'ES';
+export type UserRole = 'controller' | 'pilot';
 
 // Mapeamento de fases visíveis por posição
 export const PHASE_VISIBILITY: Record<ATCPosition, ControlPhase[]> = {
@@ -50,6 +51,7 @@ export interface FrequencyConfig {
 }
 
 export interface SessionState {
+    role: UserRole;
     position: ATCPosition;
     atis: ATISConfig;
     frequencies: FrequencyConfig;
@@ -62,6 +64,7 @@ export interface SessionState {
 
 // Actions do Reducer
 export type SessionAction =
+    | { type: 'SET_ROLE'; payload: UserRole }
     | { type: 'SET_POSITION'; payload: ATCPosition }
     | { type: 'START_SESSION' }
     | { type: 'UPDATE_ATIS'; payload: Partial<ATISConfig> }
@@ -74,6 +77,7 @@ export type SessionAction =
     | { type: 'SET_LANGUAGE'; payload: { callsign: string; language: Language } }
     | { type: 'UPDATE_FIELD'; payload: { callsign: string; phase: ControlPhase; fieldName: string; value: string } }
     | { type: 'UPDATE_NOTES'; payload: { callsign: string; notes: string } }
+    | { type: 'MOVE_AIRCRAFT'; payload: { callsign: string; direction: 'up' | 'down' } }
     | { type: 'UPDATE_GENERAL_NOTES'; payload: string }
     | { type: 'ADD_RUNWAY'; payload: string }
     | { type: 'REMOVE_RUNWAY'; payload: string }
@@ -96,6 +100,7 @@ export interface PhraseologyTemplate {
 
 // Estado inicial
 export const INITIAL_STATE: SessionState = {
+    role: 'controller',
     position: 'TWR_COMBINED',
     atis: {
         airportName: '',

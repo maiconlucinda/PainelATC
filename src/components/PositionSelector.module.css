@@ -85,3 +85,69 @@
 .startButton:hover {
   background: #4a8ac4;
 }
+
+.roleOptions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 480px;
+  margin-bottom: 2rem;
+}
+
+.roleButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+
+.roleButton:hover {
+  background: rgba(91, 155, 213, 0.1);
+  border-color: #5b9bd5;
+  transform: translateY(-2px);
+}
+
+.roleIcon {
+  font-size: 2.5rem;
+}
+
+.roleLabel {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.roleDesc {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  text-align: center;
+}
+
+.buttonRow {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.backButton {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.backButton:hover {
+  background: rgba(255, 255, 255, 0.08);
+}

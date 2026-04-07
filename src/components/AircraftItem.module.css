@@ -1,13 +1,15 @@
 .item {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 0.35rem;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.03);
   cursor: pointer;
   transition: border-color 0.15s, background 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .item:hover {
@@ -20,47 +22,47 @@
 }
 
 .info {
-  flex: 1;
-  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
 }
 
 .callsign {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.9rem;
 }
 
 .phase {
-  font-size: 0.75rem;
-  opacity: 0.6;
+  font-size: 0.65rem;
+  font-weight: 600;
 }
 
 .actions {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
-  flex-shrink: 0;
+  gap: 0.25rem;
 }
 
 .langGroup {
   display: inline-flex;
-  border-radius: 4px;
+  border-radius: 3px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .langBtn {
-  padding: 0.1rem 0.35rem;
-  font-size: 0.65rem;
+  padding: 0.05rem 0.25rem;
+  font-size: 0.6rem;
   font-weight: 700;
   border: none;
   background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.35);
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
 }
 
 .langBtn:not(:last-child) {
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .langBtn:hover {
@@ -73,18 +75,44 @@
   color: #5b9bd5;
 }
 
+.moveBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1.2rem;
+  font-size: 0.55rem;
+  border: none;
+  border-radius: 2px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s, background 0.15s;
+}
+
+.moveBtn:hover:not(:disabled) {
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.moveBtn:disabled {
+  opacity: 0.15;
+  cursor: not-allowed;
+}
+
 .removeBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  font-size: 0.85rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  font-size: 0.7rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 3px;
   background: transparent;
   color: inherit;
-  opacity: 0.5;
+  opacity: 0.35;
   cursor: pointer;
   transition: opacity 0.15s, background 0.15s;
 }

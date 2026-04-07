@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
 import { useSession } from '../state/SessionContext';
-import { getTemplates } from '../data/phraseology';
+import { getTemplates, getPilotTemplates } from '../data/phraseology';
 import { PHASE_LABELS } from './AircraftItem';
 import { TemplateRenderer } from './TemplateRenderer';
 import { PhaseNavigator } from './PhaseNavigator';
@@ -11,6 +12,25 @@ export function PhraseologyPanel() {
 
     const selectedAircraft = aircraft.find(ac => ac.callsign === selectedAircraftCallsign);
 
+    // Space = advance phase, Shift+Space = retreat phase
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (!selectedAircraftCallsign) return;
+            const tag = (e.target as HTMLElement).tagName;
+            if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+            if (e.code === 'Space') {
+                e.preventDefault();
+                if (e.shiftKey) {
+                    dispatch({ type: 'RETREAT_PHASE', payload: selectedAircraftCallsign });
+                } else {
+                    dispatch({ type: 'ADVANCE_PHASE', payload: selectedAircraftCallsign });
+                }
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [selectedAircraftCallsign, dispatch]);
+
     if (!selectedAircraft) {
         return (
             <div className={styles.panel}>
@@ -20,19 +40,26 @@ export function PhraseologyPanel() {
     }
 
     const { currentPhase, language, callsign, fieldValues } = selectedAircraft;
-    let templates = getTemplates(currentPhase, language);
+    const isPilot = state.role === 'pilot';
+    let templates = isPilot
+        ? getPilotTemplates(currentPhase, language)
+        : getTemplates(currentPhase, language);
     const phaseFieldValues = fieldValues[currentPhase] ?? {};
 
-    // Hide handoff templates when operating as TWR Combined (no one to hand off to)
-    if (position === 'TWR_COMBINED') {
-        templates = templates.filter(t =>
-            !t.segments.some(s => s.type === 'field' && s.value === 'frequência_handoff')
-        );
+    // Controller-only filtering
+    if (!isPilot) {
+        // Hide handoff templates when operating as TWR Combined (no one to hand off to)
+        if (position === 'TWR_COMBINED') {
+            templates = templates.filter(t =>
+                !t.segments.some(s => s.type === 'field' && s.value === 'frequência_handoff')
+            );
+        }
     }
 
     // Separate normal templates from exception templates (ids containing 'b' suffix = exceptions)
-    const normalTemplates = templates.filter(t => !t.id.endsWith('b'));
-    const exceptionTemplates = templates.filter(t => t.id.endsWith('b'));
+    // Exception separation only applies to controller mode
+    const normalTemplates = isPilot ? templates : templates.filter(t => !t.id.endsWith('b'));
+    const exceptionTemplates = isPilot ? [] : templates.filter(t => t.id.endsWith('b'));
 
     return (
         <div className={styles.panel}>

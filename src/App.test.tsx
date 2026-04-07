@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { SessionProvider } from './state/SessionContext'
 import App from './App'
 
@@ -23,14 +23,16 @@ describe('App', () => {
         vi.clearAllMocks()
     })
 
-    it('renders the position selector when session has not started', () => {
+    it('renders the role selector when session has not started', () => {
         renderApp()
         expect(screen.getByText('Painel ATC')).toBeInTheDocument()
-        expect(screen.getByText('Iniciar Sessão')).toBeInTheDocument()
+        expect(screen.getByText('Controlador')).toBeInTheDocument()
+        expect(screen.getByText('Piloto')).toBeInTheDocument()
     })
 
-    it('renders position options in the selector', () => {
+    it('renders position options after selecting controller role', () => {
         renderApp()
+        fireEvent.click(screen.getByText('Controlador'))
         expect(screen.getByText('Clearance Delivery (DEL)')).toBeInTheDocument()
         expect(screen.getByText('Torre Combinada')).toBeInTheDocument()
     })

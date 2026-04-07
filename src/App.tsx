@@ -1,4 +1,4 @@
-import type { ATCPosition } from './types';
+import type { ATCPosition, UserRole } from './types';
 import { useSession } from './state/SessionContext';
 import { PositionSelector } from './components/PositionSelector';
 import { SessionRestoreDialog } from './components/SessionRestoreDialog';
@@ -13,6 +13,11 @@ const POSITION_LABELS: Record<ATCPosition, string> = {
   GND: 'Ground / Solo (GND)',
   TWR: 'Torre (TWR)',
   TWR_COMBINED: 'Torre Combinada',
+};
+
+const ROLE_LABELS: Record<UserRole, string> = {
+  controller: 'Controlador',
+  pilot: 'Piloto',
 };
 
 function AppContent() {
@@ -34,7 +39,9 @@ function AppContent() {
     <div className={styles.layout}>
       <header className={styles.header}>
         <h1 className={styles.title}>Painel ATC</h1>
-        <span className={styles.positionBadge}>{POSITION_LABELS[state.position]}</span>
+        <span className={styles.positionBadge}>
+          {state.role === 'pilot' ? ROLE_LABELS.pilot : POSITION_LABELS[state.position]}
+        </span>
         <button className={styles.changePositionBtn} onClick={handleChangePosition}>
           Trocar Posição
         </button>
@@ -47,11 +54,13 @@ function AppContent() {
         <NewSessionButton />
       </header>
       <div className={styles.body}>
-        <aside className={styles.sidebar}>
-          <AircraftList />
-          <ATISPanel />
-        </aside>
+        {state.role === 'controller' && (
+          <aside className={styles.sidebar}>
+            <ATISPanel />
+          </aside>
+        )}
         <main className={styles.main}>
+          <AircraftList />
           <PhraseologyPanel />
         </main>
       </div>

@@ -30,9 +30,26 @@ export function AircraftList() {
     };
 
     return (
-        <div className={styles.panel}>
-            <h2 className={styles.title}>Aeronaves</h2>
-
+        <div className={styles.bar}>
+            <div className={styles.list}>
+                {state.aircraft.length === 0 ? (
+                    <span className={styles.empty}>Nenhuma aeronave</span>
+                ) : (
+                    state.aircraft.map((ac, index) => (
+                        <AircraftItem
+                            key={ac.callsign}
+                            aircraft={ac}
+                            isSelected={state.selectedAircraftCallsign === ac.callsign}
+                            isFirst={index === 0}
+                            isLast={index === state.aircraft.length - 1}
+                            onSelect={(cs) => dispatch({ type: 'SELECT_AIRCRAFT', payload: cs })}
+                            onSetLanguage={(cs, lang) => dispatch({ type: 'SET_LANGUAGE', payload: { callsign: cs, language: lang } })}
+                            onRemove={(cs) => dispatch({ type: 'REMOVE_AIRCRAFT', payload: cs })}
+                            onMove={(cs, dir) => dispatch({ type: 'MOVE_AIRCRAFT', payload: { callsign: cs, direction: dir } })}
+                        />
+                    ))
+                )}
+            </div>
             <form className={styles.addForm} onSubmit={handleAdd}>
                 <input
                     type="text"
@@ -41,29 +58,9 @@ export function AircraftList() {
                     value={callsignInput}
                     onChange={(e) => handleInputChange(e.target.value)}
                 />
-                <button type="submit" className={styles.addBtn}>
-                    Adicionar
-                </button>
+                <button type="submit" className={styles.addBtn}>+</button>
             </form>
-
-            {error && <div className={styles.error}>{error}</div>}
-
-            <div className={styles.list}>
-                {state.aircraft.length === 0 ? (
-                    <div className={styles.empty}>Nenhuma aeronave adicionada</div>
-                ) : (
-                    state.aircraft.map((ac) => (
-                        <AircraftItem
-                            key={ac.callsign}
-                            aircraft={ac}
-                            isSelected={state.selectedAircraftCallsign === ac.callsign}
-                            onSelect={(cs) => dispatch({ type: 'SELECT_AIRCRAFT', payload: cs })}
-                            onSetLanguage={(cs, lang) => dispatch({ type: 'SET_LANGUAGE', payload: { callsign: cs, language: lang } })}
-                            onRemove={(cs) => dispatch({ type: 'REMOVE_AIRCRAFT', payload: cs })}
-                        />
-                    ))
-                )}
-            </div>
+            {error && <span className={styles.error}>{error}</span>}
         </div>
     );
 }

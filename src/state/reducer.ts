@@ -16,6 +16,9 @@ export function createEmptyFieldValues(): Record<ControlPhase, Record<string, st
 
 export function sessionReducer(state: SessionState, action: SessionAction): SessionState {
     switch (action.type) {
+        case 'SET_ROLE':
+            return { ...state, role: action.payload };
+
         case 'SET_POSITION': {
             const newPosition = action.payload;
             const visiblePhases = getVisiblePhases(newPosition);
@@ -137,6 +140,17 @@ export function sessionReducer(state: SessionState, action: SessionAction): Sess
 
         case 'UPDATE_GENERAL_NOTES':
             return { ...state, generalNotes: action.payload };
+
+        case 'MOVE_AIRCRAFT': {
+            const { callsign, direction } = action.payload;
+            const idx = state.aircraft.findIndex(ac => ac.callsign === callsign);
+            if (idx === -1) return state;
+            const newIdx = direction === 'up' ? idx - 1 : idx + 1;
+            if (newIdx < 0 || newIdx >= state.aircraft.length) return state;
+            const newAircraft = [...state.aircraft];
+            [newAircraft[idx], newAircraft[newIdx]] = [newAircraft[newIdx], newAircraft[idx]];
+            return { ...state, aircraft: newAircraft };
+        }
 
         case 'ADD_RUNWAY': {
             const newRunway = {
