@@ -200,7 +200,7 @@ describe('Bug Condition Exploration: Pilot Callsign at End', () => {
         const templateArb = fc.constantFrom(...allPilotTemplates);
 
         fc.assert(
-            fc.property(templateArb, ({ phase, language, template }) => {
+            fc.property(templateArb, ({ template }) => {
                 const lastSegment = template.segments[template.segments.length - 1];
                 expect(lastSegment).toEqual({ type: 'field', value: 'callsign' });
             }),
